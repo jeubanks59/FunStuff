@@ -1,0 +1,40 @@
+\documentclass{paper}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{setspace}
+\geometry{
+	  top = 1in
+	, bottom = 1in
+	, left = 1in
+	, right = 1in
+}
+\title{Dynamics Between Heterogeneous Spending Types in Mobile Gaming}
+\author{Joshua L. Eubanks}
+\begin{document}
+\maketitle
+\begin{doublespacing}
+\section*{Methodology}
+For understanding the dynamics between multiple individuals in the mobile gaming industry, I assume a biological model that implements a Lotka-Volterra competition model. In this scenario, two or more species are competing for the same resource and as a result hinder each other's growth. I link this to mobile gaming industry because the different types of spenders are competing over the same resource, a collectible item. Using the model above, I can observe the birth rates, carrying capacity, and the coefficients of competition across different types. One could separate the types by if they spend money on the app or not (spenders and non-spenders) or they can break down the spenders by types (minnows, dolphins, whales, etc.). Separating by spending types would be best implemented by using Jenks' natural breaks instead of similar methods such as K-means because Jenks takes advantage of the fact that one dimensional data (amount spent daily) is sortable. This makes the algorithm quicker than K-means which is better suited for more than one dimension.
+
+\section*{Model}
+The competitive model assumes a logistic growth rate with a finite carrying capacity. This gives rise to the following equation:
+\begin{align*}
+N_{i,t} &= N_{i,t-1}\exp\left(\frac{r_{i}[K_{i}-N_{i,t-1}-\sum_{j}\alpha_{ji}N_{j,t-1}]}{K_{i}}\right) \text{\quad where } i \neq j
+\end{align*} 
+from which, from some minor manipulation, obtain:
+\begin{align*}
+\log\left(\frac{N_{i,t}}{N_{i,t-1}}\right) &= r_{i} - \frac{N_{i,t-1}}{K_{i}} - \sum_{j}\alpha_{ji}\frac{N_{j,t-1}}{K_{i}} \text{\quad where } i \neq j
+\end{align*}
+which is the discrete analog to the Lotka-Volterra differential equations. The interpretation of $r_{i}$ would be the birth rate of the type, $K_{i}$ would the be carrying capacity, and $\alpha_{ji}$ would be the competition coefficient between the two types.
+ 
+\section*{Data}
+Since I never obtained the data, I simulate some random normals and show how to implement it given a dataframe. I generate data for 365 days with 5 types.
+
+\end{doublespacing}
+\nocite{*}
+\bibliographystyle{chicago}
+
+\bibliography{References}
+
+\end{document}
